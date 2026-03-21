@@ -31,9 +31,9 @@
   --color-amber: #D97706;
   --color-crimson: #DC2626;
 
-  /* Typography */
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  /* Typography — Inter self-hosted via next/font, referenced by CSS variable --font-inter */
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(27, 42, 74, 0.05);
