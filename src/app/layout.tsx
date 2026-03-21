@@ -34,12 +34,21 @@ export const metadata: Metadata = {
     title: "Charterwell — The AI Claims Intelligence Workspace",
     description:
       "The AI-native claims intelligence workspace. Every document understood. Every decision informed. Every claim connected.",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Charterwell — The AI Claims Intelligence Workspace",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Charterwell — The AI Claims Intelligence Workspace",
     description:
       "The AI-native claims intelligence workspace. Every document understood. Every decision informed.",
+    images: ["/og-image.svg"],
   },
   robots: {
     index: true,
@@ -109,8 +118,14 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className="flex min-h-screen flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-teal-500 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>
