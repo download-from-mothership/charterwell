@@ -1,17 +1,19 @@
-# Marketing Website Evaluation — charterwell.io
+# Marketing Website Evaluation — charterwell.ai
 
 **Prepared by:** CMO
-**Date:** 2026-03-21
+**Date:** 2026-03-21 (Updated)
 **Issue:** KEN-60
-**Status:** NOT LAUNCH-READY
+**Status:** NOT YET LAUNCH-READY — Major progress, deployment pending
 
 ---
 
 ## Executive Summary
 
-**charterwell.io does not exist.** The domain does not resolve, no website codebase has been built, and no deployment infrastructure is configured. None of the five success criteria can be evaluated against a live product because there is no live product.
+The charterwell.ai marketing website has been substantially built as a Next.js 16 static site. The codebase is clean, well-structured, and builds successfully to 2MB of static HTML. All core pages exist with professional, on-brand copy. A blog system, contact form, SEO infrastructure, and structured data are in place.
 
-What *does* exist is an exceptionally thorough set of strategy documents (01 through 09 in `docs/marketing/`) that define positioning, messaging, content calendar, buyer personas, and brand guidelines. The strategy is board-ready. The execution has not started.
+**The site is not yet launch-ready because it has not been deployed.** The codebase itself is at ~70% readiness. The remaining work is deployment, polish, and a handful of content gaps.
+
+Previous evaluation (earlier today): "The site does not exist." That is no longer true.
 
 ---
 
@@ -21,155 +23,148 @@ What *does* exist is an exceptionally thorough set of strategy documents (01 thr
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| charterwell.io loads in under 2 seconds on 4G | **FAIL** | Domain does not resolve (DNS NXDOMAIN) |
-| Lighthouse: Perf ≥ 90, A11y ≥ 95, BP ≥ 95, SEO ≥ 95 | **FAIL** | No page to test |
+| charterwell.ai loads in under 2 seconds on 4G | **BLOCKED** | Site not deployed. Static HTML output is 2MB total — architecture strongly favors sub-2s loads. |
+| Lighthouse: Perf ≥ 90, A11y ≥ 95, BP ≥ 95, SEO ≥ 95 | **LIKELY PASS** | Cannot run Lighthouse without a live URL. Static export, minimal JS, self-hosted fonts, semantic HTML all point to 90+ scores. |
 | Zero downtime in first 48 hours | **N/A** | Not launched |
 
-**Verdict: FAIL — No website exists.**
+**Verdict: BLOCKED — Awaiting deployment to Vercel + DNS cutover.**
 
-**What's needed:**
-- Domain acquisition: charterwell.io is referenced in the issue, but brand strategy (03) recommends charterwell.ai as primary and charterwell.com for enterprise credibility. Legal counsel (clearance-update-2026-03-21) now recommends charterwell.com as primary to create distance from chartwell.ai (ChartWellAI's domain). Domain strategy must be resolved before build.
-- Framework selection and codebase scaffold
-- Hosting/deployment configuration
-- DNS setup and SSL
+**What's done:**
+- Next.js 16 static export builds clean (11 HTML pages, 2MB total)
+- Tailwind CSS v4 with brand design tokens
+- Self-hosted Inter font (no external CDN dependency)
+- Responsive layout tested at all breakpoints
+- sitemap.xml, robots.txt, favicon.svg all present
+
+**What's remaining:**
+- Vercel project creation and deployment
+- DNS configuration (charterwell.ai → Vercel)
+- SSL verification
+- Plausible Analytics script integration
+- Lighthouse audit on live URL
 
 ### 2. DOES IT PASS THE VP CLAIMS TEST?
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| Understand what Charterwell does within 10 seconds | **FAIL** | No site to visit |
-| Believe it's credible within 30 seconds | **FAIL** | No site to visit |
-| Find demo request form within 60 seconds | **FAIL** | No site to visit |
-| Never triggers "startup" or "not ready" impression | **FAIL** | No site to visit |
+| Understand what Charterwell does within 10 seconds | **PASS** | Hero: "The AI Claims Intelligence Workspace" + tagline immediately communicates purpose |
+| Believe it's credible within 30 seconds | **CONDITIONAL** | Professional design, strong copy, 5-step product walkthrough with metrics. BUT: no customer logos, no team photos, social proof section is a placeholder ("Design partner program now open"). |
+| Find demo request form within 60 seconds | **PASS** | Header nav has "Contact" link. Hero CTA → /contact. Footer CTA → /contact. Contact page has a clean lead capture form. |
+| Never triggers "startup" or "not ready" impression | **CONDITIONAL** | Copy reads like established company. Risk areas: (1) Formspree action is `placeholder` — form will fail on submit, (2) Social proof section is empty, (3) Blog has only 1 post, (4) No team photos on /about. |
 
-**Verdict: FAIL — No website exists.**
+**Verdict: CONDITIONAL PASS — Content is strong, but credibility gaps remain.**
 
-**What's ready for build:**
-- Homepage messaging is defined in 05-content-thought-leadership.md: *"The AI Claims Workspace. Every document understood. Every decision informed. Every claim connected."*
-- Buyer personas are deeply researched (02-buyer-personas.md) with specific pain points for VP Claims, CIO, CCO, and Claims Team Lead
-- Brand voice is established (03): "McKinsey meets Stripe" — authoritative but modern
-- Page structure is planned: Homepage, Product, For Claims Leaders, For CIOs, Resources, About, Design Partners
+**Strengths:**
+- Hero messaging is clear and category-defining
+- Problem section with industry stats establishes authority
+- Product walkthrough (Ingest → Understand → Route → Check → Act) is concrete and understandable
+- Solutions page has persona-specific messaging for Claims Leaders, CIOs, and Ops Directors
+- Contact form asks the right questions (company, role, claims workflow)
+- Copy tone is "McKinsey meets Stripe" as intended — authoritative, modern, not startup-y
 
-**Gaps even in strategy:**
-- No wireframes or design mockups exist
-- No actual design assets (logo files, icons, imagery) referenced
-- No demo/product screenshots available for the site to showcase
-- Demo request form workflow not defined (where do submissions go? CRM? Email? Notion?)
+**Gaps to close:**
+- Form endpoint is a placeholder (`formspree.io/f/placeholder`) — **must fix before launch**
+- Social proof section needs at minimum a design partner CTA or removal
+- /about page has team placeholder — needs real content or restructuring
+- No product screenshots or visuals beyond text — a VP expects to see the product
+- Blog has 1 post — minimum 3 recommended for credibility
 
 ### 3. CAN THE CMO UPDATE IT WITHOUT ENGINEERING?
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| Publish a new blog post without engineering | **FAIL** | No blog platform exists |
-| Update homepage copy without engineering | **FAIL** | No CMS or content system exists |
-| Add a customer logo without engineering | **FAIL** | No site exists |
+| Publish a new blog post without engineering | **PASS** | Blog system reads `.mdx` files from `/content/blog/`. CMO adds a file with frontmatter → it appears on /resources. Tested: system auto-generates slug, handles markdown formatting, estimates read time. |
+| Update homepage copy without engineering | **PARTIAL** | Copy is in React components (`src/app/page.tsx`). Requires editing JSX. Doable via GitHub web editor but not as simple as a CMS. |
+| Add a customer logo without engineering | **PARTIAL** | Logo can be added to `/public/` and referenced in code, but requires editing a React component to display it. |
 
-**Verdict: FAIL — No website or CMS exists.**
+**Verdict: PARTIAL PASS — Blog is self-service. Homepage and logo changes require code edits.**
 
-**Recommendations for when we build:**
-- Use a headless CMS (Sanity, Contentful, or Notion API) for blog posts and landing page copy
-- Or use MDX/Markdown-based content in an Astro or Next.js site with a simple Git-based workflow
-- Gated content system needed for whitepapers (per content strategy in 05)
-- Whatever is chosen must support: blog posts, gated downloads, homepage copy edits, logo/image uploads
+**Assessment:** The blog system meets the spirit of this criterion — I can publish thought leadership content without engineering help by committing an .mdx file. Homepage copy and logo additions require JSX edits, which is acceptable for launch but should be improved post-launch (CMS layer or content files).
 
 ### 4. IS THE FOUNDING ENGINEER FREE?
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| Total engineering time ≤ 5 hours | **N/A** | Build hasn't started |
-| Codebase onboardable in < 2 hours | **N/A** | No codebase exists |
-| No unplanned maintenance burden | **N/A** | Nothing to maintain |
+| Total engineering time ≤ 5 hours | **ON TRACK** | Build plan budgets ≤4 hours total. Build was done by an engineering agent, not the founding engineer. Review gates and DNS cutover still ahead. |
+| Codebase onboardable in < 2 hours | **LIKELY PASS** | Clean TypeScript, Next.js App Router conventions, single-concern components, no external API dependencies. Build plan is documented. |
+| No unplanned maintenance burden | **PASS** | Static export = no server runtime. Dependencies are minimal (Next.js, Tailwind, gray-matter). No database, no auth, no API routes. |
 
-**Verdict: N/A — Cannot evaluate without a build.**
-
-**Risk flag:** The 5-hour engineering budget is tight for a full marketing site with CMS, blog, gated content, form handling, SEO, and multi-page structure. This constraint strongly favors:
-- A no-code/low-code approach (Webflow, Framer) — but may limit customization
-- A template-based approach (Astro + Tailwind + MDX) — fast to scaffold, but still needs engineering for initial setup
-- An AI-assisted build — which is likely the intent given the team's tooling
+**Verdict: ON TRACK — Engineering time budget appears intact. Review gates still needed.**
 
 ### 5. DOES IT OWN "CHARTERWELL" IN SEARCH?
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| "charterwell" returns our site as #1 within 2 weeks | **FAIL** | No site indexed |
-| "charterwell ai" returns our site as #1 | **FAIL** | No site indexed |
-| Clearly distinguishable from Chartwell entities | **FAIL** | No site exists |
+| "charterwell" returns our site as #1 within 2 weeks | **NOT YET** | Site not indexed (not deployed). SEO infrastructure is ready. |
+| "charterwell ai" returns our site as #1 | **NOT YET** | Same blocker — need to deploy and submit to Google Search Console. |
+| Clearly distinguishable from Chartwell entities | **PASS (in code)** | Title: "Charterwell — The AI Claims Intelligence Workspace." Description specifies claims intelligence. JSON-LD Organization schema with `foundingDate: 2026`. Keyword strategy targets "claims intelligence workspace" (no one else uses this phrase). |
 
-**Verdict: FAIL — No website to index.**
+**Verdict: BLOCKED — SEO is well-prepared but site must be deployed and indexed.**
 
-**SEO readiness assessment:**
-- Target keywords are well-defined (05-content-thought-leadership.md)
-- Primary keyword cluster: "AI claims workspace" — this is a category-creation play, low competition
-- Domain confusion risk is ELEVATED per legal counsel: charterwell.ai vs chartwell.ai (ChartWellAI) differ by one letter
-- Legal recommends charterwell.com as primary domain, .ai as secondary
-- Brand discipline critical: always "Charterwell" (never "Charter" or "Chartwell") per trademark guidance
+**SEO readiness checklist:**
+- ✅ Unique, descriptive title tags on every page
+- ✅ OpenGraph and Twitter Card metadata
+- ✅ JSON-LD structured data (Organization + SoftwareApplication)
+- ✅ sitemap.xml with all URLs
+- ✅ robots.txt allowing full crawl
+- ✅ Semantic HTML (proper heading hierarchy, landmarks)
+- ✅ Blog with keyword-rich content
+- ⬜ Google Search Console submission
+- ⬜ OG image for social sharing
+- ⬜ Analytics to track search traffic
 
 ---
 
 ## Overall Verdict
 
-| Criterion | Status |
-|---|---|
-| 1. Live and Fast | **FAIL** |
-| 2. VP Claims Test | **FAIL** |
-| 3. CMO Can Update | **FAIL** |
-| 4. Engineer is Free | **N/A** |
-| 5. Owns Search | **FAIL** |
+| Criterion | Previous (6 hours ago) | Current | Trend |
+|---|---|---|---|
+| 1. Live and Fast | **FAIL** (no site) | **BLOCKED** (built, not deployed) | ↑ |
+| 2. VP Claims Test | **FAIL** (no site) | **CONDITIONAL PASS** | ↑↑ |
+| 3. CMO Can Update | **FAIL** (no site) | **PARTIAL PASS** | ↑↑ |
+| 4. Engineer is Free | **N/A** | **ON TRACK** | ↑ |
+| 5. Owns Search | **FAIL** (no site) | **BLOCKED** (ready, not deployed) | ↑ |
 
-**The site is not launch-ready because it does not exist.**
-
----
-
-## What Exists vs. What's Missing
-
-### Ready (Strategy Layer)
-- Brand identity and voice guidelines
-- Buyer personas with pain points and messaging
-- Homepage and page-level messaging
-- Content calendar (6 months)
-- SEO keyword strategy
-- Competitive battle cards
-- Pitch deck content
-- LinkedIn company page strategy
-
-### Missing (Execution Layer)
-- Domain acquisition and DNS configuration
-- Website codebase (framework, pages, components)
-- CMS for non-engineering content updates
-- Design assets (logo files, favicons, OG images)
-- Blog platform with gated content support
-- Form handling (demo requests, email capture)
-- Analytics and tracking setup
-- Deployment pipeline
-- Wireframes or design mockups
+**The site is not launch-ready, but it is close.** The primary blocker is deployment. The secondary blockers are content polish items.
 
 ---
 
-## Recommended Next Steps
+## Pre-Launch Blockers (Must Fix)
 
-### Decision 1: Domain Strategy (URGENT)
-Legal counsel recommends charterwell.com as primary, with .ai as secondary. The issue references charterwell.io. The board needs to decide:
-- **Option A:** charterwell.com (enterprise credibility, distance from chartwell.ai)
-- **Option B:** charterwell.ai (category signal, matches brand strategy docs)
-- **Option C:** charterwell.io (developer/tech signal, defensive registration)
+| # | Item | Severity | Owner |
+|---|---|---|---|
+| 1 | **Deploy to Vercel** | Critical | Engineering |
+| 2 | **Configure DNS** (charterwell.ai → Vercel) | Critical | Engineering/Ops |
+| 3 | **Fix Formspree endpoint** (currently `placeholder`) | Critical | Engineering |
+| 4 | **Add OG image** for social sharing | High | CMO/Design |
+| 5 | **Social proof section** — either add content or remove placeholder | High | CMO |
 
-Recommendation: **Option A** per legal counsel, with .ai and .io as redirects.
+## Pre-Launch Recommended (Should Fix)
 
-### Decision 2: Build Approach
-Given the 5-hour engineering constraint:
-
-| Approach | Eng Time | CMO Updateable | Performance | Cost |
-|---|---|---|---|---|
-| Webflow | ~2 hours (DNS + integrations) | Yes | Good (≥85) | $30-50/mo |
-| Framer | ~1 hour (DNS only) | Yes | Good (≥85) | $20-30/mo |
-| Astro + MDX + Vercel | ~4-5 hours | Partial (Git-based) | Excellent (≥95) | Free-$20/mo |
-| Next.js + Sanity + Vercel | ~8-10 hours | Yes | Excellent (≥95) | $20-50/mo |
-
-Recommendation: **Framer or Webflow** for speed-to-launch within the engineering constraint. Migrate to a code-based solution later if needed.
-
-### Decision 3: Timeline
-Per GTM strategy (04), website launch is a Month 1-2 milestone. We need to know where we are in that timeline and what the hard deadline is.
+| # | Item | Impact | Owner |
+|---|---|---|---|
+| 6 | Add 2 more blog posts for credibility | Medium | CMO |
+| 7 | Integrate Plausible Analytics | Medium | Engineering |
+| 8 | Populate /about team section | Medium | CMO |
+| 9 | Add CI pipeline (lint, Lighthouse, a11y) | Medium | Engineering |
+| 10 | Google Search Console setup post-deploy | Medium | CMO/Engineering |
 
 ---
 
-*This evaluation will be updated once a website exists to test against the success criteria.*
+## What Changed Since Last Evaluation
+
+The engineering agent built a complete Next.js 16 marketing website in a single day:
+
+- **5 commits** from scaffold to SEO infrastructure
+- **11 static pages** with professional, on-brand copy
+- **Blog system** with MDX support and 1 published post
+- **Contact/demo form** with lead capture fields
+- **SEO infrastructure** (structured data, sitemap, robots.txt, OG tags)
+- **Self-hosted fonts** and Tailwind design system
+- **Logo variants** (horizontal, stacked, monogram, wordmark — all in light/dark)
+
+This is a dramatic improvement. The strategy-to-execution gap identified this morning is rapidly closing.
+
+---
+
+*Next evaluation: after deployment to staging URL. Will run Lighthouse, test form submission, and do a full VP Claims walkthrough.*
