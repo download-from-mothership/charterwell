@@ -1,0 +1,35 @@
+- id: charterwell-001
+  fact: "Charterwell is an AI document-processing platform for insurance, entering at the document layer for P&C claims"
+  source: board directive
+  recorded: 2026-03-21
+  status: active
+  confidence: 1.0
+  access_count: 1
+  last_accessed: 2026-03-21
+
+- id: charterwell-002
+  fact: "Market thesis delivered 2026-03-21 at charterwell/market-thesis.md covering TAM ($40B+), SAM ($6-8B), SOM ($150-300M at Year 5)"
+  source: KEN-21 research
+  recorded: 2026-03-21
+  status: active
+  confidence: 0.9
+  access_count: 1
+  last_accessed: 2026-03-21
+
+- id: charterwell-003
+  fact: "AI-in-insurance market: $13.5B (2026) growing 35.7% CAGR to $154B+ by 2034. Claims processing AI: $514M (2024) to $2.76B (2034) at 18.3% CAGR"
+  source: Fortune Business Insights, Market.us
+  recorded: 2026-03-21
+  status: active
+  confidence: 0.85
+  access_count: 1
+  last_accessed: 2026-03-21
+
+- id: charterwell-004
+  fact: "88% of auto insurers want AI but only 7% have scaled it to production — the gap is execution, not intent"
+  source: industry surveys via web research
+  recorded: 2026-03-21
+  status: active
+  confidence: 0.85
+  access_count: 1
+  last_accessed: 2026-03-21

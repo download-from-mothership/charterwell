@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charterwell Competitive Battle Cards</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @page {
+    size: letter;
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #fff;
+    color: #1F2937;
+    font-size: 9.5pt;
+    line-height: 1.35;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .card {
+    width: 8.5in;
+    min-height: 11in;
+    max-height: 11in;
+    padding: 0;
+    page-break-after: always;
+    page-break-inside: avoid;
+    overflow: hidden;
+    background: #FAFAF8;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card:last-child { page-break-after: auto; }
+
+  /* Header */
+  .card-header {
+    background: #1B2A4A;
+    color: #fff;
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-header .logo {
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .card-header .label {
+    font-size: 8pt;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0D9488;
+  }
+
+  /* Competitor banner */
+  .competitor-banner {
+    padding: 12px 28px;
+    border-bottom: 3px solid #0D9488;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .competitor-name {
+    font-size: 18pt;
+    font-weight: 700;
+    color: #1B2A4A;
+  }
+
+  .competitor-meta {
+    font-size: 8.5pt;
+    color: #64748B;
+    font-weight: 500;
+  }
+
+  /* Content area */
+  .card-body {
+    padding: 12px 28px 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: min-content;
+    gap: 6px 20px;
+    align-content: start;
+  }
+
+  .section {
+    margin-bottom: 0;
+  }
+
+  .section-label {
+    font-size: 7.5pt;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #0D9488;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .section li {
+    padding-left: 10px;
+    position: relative;
+    margin-bottom: 3px;
+    font-size: 8.5pt;
+    line-height: 1.3;
+  }
+
+  .section li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #0D9488;
+    font-weight: 700;
+  }
+
+  .section p {
+    font-size: 8.5pt;
+    line-height: 1.3;
+  }
+
+  /* Counter position - special styling */
+  .counter-position {
+    grid-column: 1 / -1;
+    background: #1B2A4A;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 4px;
+    margin: 2px 0;
+  }
+
+  .counter-position .section-label {
+    color: #0D9488;
+    border-bottom-color: rgba(255,255,255,0.15);
+  }
+
+  .counter-position p {
+    font-size: 9.5pt;
+    font-weight: 600;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  /* Trap questions */
+  .trap-questions {
+    grid-column: 1 / -1;
+  }
+
+  .trap-questions li {
+    font-style: italic;
+    color: #1B2A4A;
+    font-size: 8.5pt;
+  }
+
+  /* Partnership */
+  .partnership {
+    grid-column: 1 / -1;
+    background: rgba(13, 148, 136, 0.08);
+    padding: 8px 12px;
+    border-radius: 4px;
+    border-left: 3px solid #0D9488;
+  }
+
+  .partnership p {
+    font-size: 8.5pt;
+  }
+
+  /* Risk note */
+  .risk-note {
+    grid-column: 1 / -1;
+    background: rgba(239, 68, 68, 0.06);
+    padding: 8px 12px;
+    border-radius: 4px;
+    border-left: 3px solid #EF4444;
+  }
+
+  .risk-note .section-label { color: #DC2626; border-bottom-color: rgba(239, 68, 68, 0.15); }
+  .risk-note p { font-size: 8.5pt; color: #7F1D1D; }
+
+  /* Footer */
+  .card-footer {
+    padding: 8px 28px;
+    text-align: center;
+    font-size: 7pt;
+    color: #94A3B8;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-top: 1px solid #E2E8F0;
+    margin-top: auto;
+  }
+
+  /* Left column sections */
+  .col-left { grid-column: 1; }
+  .col-right { grid-column: 2; }
+  .full-width { grid-column: 1 / -1; }
+
+  @media print {
+    body { background: #fff; }
+    .card { box-shadow: none; border: none; }
+  }
+
+  @media screen {
+    .card {
+      margin: 20px auto;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- CARD 1: TRACTABLE -->
+<div class="card">
+  <div class="card-header">
+    <span class="logo">CHARTERWELL</span>
+    <span class="label">Competitive Brief</span>
+  </div>
+  <div class="competitor-banner">
+    <span class="competitor-name">Tractable</span>
+    <span class="competitor-meta">Computer Vision &bull; $185M raised &bull; $1B valuation</span>
+  </div>
+  <div class="card-body">
+    <div class="section col-left">
+      <div class="section-label">Who They Are</div>
+      <p>Computer vision platform for auto and property damage appraisal from photos. AI-powered visual inspection used by insurers globally.</p>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">What They Do Well</div>
+      <ul>
+        <li>Best-in-class auto/property damage assessment from photos</li>
+        <li>Marquee carriers: Tokio Marine, The Hartford, Ageas</li>
+        <li>Global footprint — 10+ countries, proven at scale</li>
+      </ul>
+    </div>
+
+    <div class="section full-width">
+      <div class="section-label">Where They Fall Short</div>
+      <ul>
+        <li>Photos only — zero document intelligence capability</li>
+        <li>Cannot process policy text, medical records, compliance filings, or adjuster notes</li>
+        <li>Single use case (damage appraisal) in a multi-document workflow</li>
+        <li>Covers &lt;15% of the document surface area of an average P&amp;C claim</li>
+      </ul>
+    </div>
+
+    <div class="counter-position">
+      <div class="section-label">Our Counter-Position</div>
+      <p>"Tractable reads photos. Charterwell reads everything else. A claim isn't a photo — it's 10–15 documents. We start where Tractable stops."</p>
+    </div>
+
+    <div class="section col-left">
+      <div class="section-label">Proof Points</div>
+      <ul>
+        <li>Average P&amp;C claim touches 10–15 documents; only 1–2 are images</li>
+        <li>Tractable covers &lt;15% of document surface area in a typical claim</li>
+        <li>Claims decisions depend on policy language, medical records, and compliance — none of which are photos</li>
+      </ul>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">Trap Questions</div>
+      <ul>
+        <li>"How do you handle the police report, medical records, and policy declaration page?"</li>
+        <li>"What happens after the damage estimate — who routes the claim, checks coverage, ensures compliance?"</li>
+        <li>"How many document types does a typical claim involve beyond photos?"</li>
+      </ul>
+    </div>
+
+    <div class="partnership">
+      <div class="section-label">Partnership Angle</div>
+      <p>Tractable is a natural integration partner. Their damage scores feed directly into the Charterwell workspace. Complementary, not competitive — position accordingly.</p>
+    </div>
+  </div>
+  <div class="card-footer">Confidential — Internal Use Only &bull; Charterwell &bull; March 2026</div>
+</div>
+
+<!-- CARD 2: SHIFT TECHNOLOGY -->
+<div class="card">
+  <div class="card-header">
+    <span class="logo">CHARTERWELL</span>
+    <span class="label">Competitive Brief</span>
+  </div>
+  <div class="competitor-banner">
+    <span class="competitor-name">Shift Technology</span>
+    <span class="competitor-meta">Fraud Detection → Claims AI &bull; $320M raised &bull; $1B valuation</span>
+  </div>
+  <div class="card-body">
+    <div class="section col-left">
+      <div class="section-label">Who They Are</div>
+      <p>AI platform built for fraud detection, now expanding into claims automation. Being acquired by Predictiv AI. 400+ insurer relationships worldwide.</p>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">What They Do Well</div>
+      <ul>
+        <li>Deep fraud detection expertise — category leader</li>
+        <li>400+ insurer relationships; AXA 5-year renewal (March 2026)</li>
+        <li>Shift Claims (Sept 2025) — agentic AI with strong early metrics</li>
+      </ul>
+    </div>
+
+    <div class="section full-width">
+      <div class="section-label">Where They Fall Short</div>
+      <ul>
+        <li>DNA is analytics/decisioning, not document intelligence — fundamentally different architecture</li>
+        <li>No workspace concept — point solution for fraud, bolting on claims</li>
+        <li>"Document analysis" is a feature, not a platform — core was built for fraud scoring</li>
+        <li>Predictiv AI acquisition creates roadmap uncertainty and organizational distraction</li>
+      </ul>
+    </div>
+
+    <div class="counter-position">
+      <div class="section-label">Our Counter-Position</div>
+      <p>"Shift tells you whether a claim is suspicious. Charterwell processes the documents that make up the claim. Different problems."</p>
+    </div>
+
+    <div class="section col-left">
+      <div class="section-label">Proof Points</div>
+      <ul>
+        <li>Shift's "document analysis" is a feature, not a platform — core built for fraud</li>
+        <li>Sub-$1B acquisition on $320M raised signals growth challenges</li>
+        <li>Claims automation is a pivot, not their origin — depth gap vs. purpose-built solutions</li>
+      </ul>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">Trap Questions</div>
+      <ul>
+        <li>"Can Shift process a 200-page medical record and extract relevant diagnoses?"</li>
+        <li>"How does Shift handle state-specific compliance filings?"</li>
+        <li>"What happens to the Shift roadmap under Predictiv AI?"</li>
+      </ul>
+    </div>
+
+    <div class="risk-note">
+      <div class="section-label">Competitive Risk</div>
+      <p>Most dangerous near-term competitor. 18–24 month window to establish position before Shift builds a real document intelligence layer. Treat with urgency.</p>
+    </div>
+  </div>
+  <div class="card-footer">Confidential — Internal Use Only &bull; Charterwell &bull; March 2026</div>
+</div>
+
+<!-- CARD 3: FURTHERAI -->
+<div class="card">
+  <div class="card-header">
+    <span class="logo">CHARTERWELL</span>
+    <span class="label">Competitive Brief</span>
+  </div>
+  <div class="competitor-banner">
+    <span class="competitor-name">FurtherAI</span>
+    <span class="competitor-meta">Insurance AI Assistant &bull; $30M raised (a16z) &bull; YC-backed</span>
+  </div>
+  <div class="card-body">
+    <div class="section col-left">
+      <div class="section-label">Who They Are</div>
+      <p>AI assistant for insurance workflows. Backed by a16z ($30M) and Y Combinator. Broad horizontal approach to insurance automation.</p>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">What They Do Well</div>
+      <ul>
+        <li>Strong investor backing — a16z resources and distribution network</li>
+        <li>Rapid growth trajectory as a well-funded startup</li>
+        <li>Broad workflow coverage across insurance operations</li>
+      </ul>
+    </div>
+
+    <div class="section full-width">
+      <div class="section-label">Where They Fall Short</div>
+      <ul>
+        <li>Going wide, not deep — breadth without depth in any single domain</li>
+        <li>No visible playbook system or structured document intelligence layer</li>
+        <li>Fewer production deployments than incumbents or specialized players</li>
+        <li>Generalist approach means shallower understanding of complex insurance document types</li>
+      </ul>
+    </div>
+
+    <div class="counter-position">
+      <div class="section-label">Our Counter-Position</div>
+      <p>"FurtherAI is building an AI assistant for many insurance tasks. Charterwell is building the workspace for claims professionals. We go deep on the document layer."</p>
+    </div>
+
+    <div class="section col-left">
+      <div class="section-label">Proof Points</div>
+      <ul>
+        <li>Charterwell's doc intelligence is purpose-built for 50+ P&amp;C document types</li>
+        <li>FurtherAI's generalist approach = shallower understanding per document type</li>
+        <li>Claims-specific depth requires insurance domain expertise, not general AI breadth</li>
+      </ul>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">Trap Questions</div>
+      <ul>
+        <li>"Can you show me FurtherAI on a complex BI claim with 50+ pages of medical records?"</li>
+        <li>"How does extraction accuracy compare on insurance-specific docs vs. generic PDFs?"</li>
+        <li>"How many insurance document types does FurtherAI understand at a structural level?"</li>
+      </ul>
+    </div>
+
+    <div class="risk-note">
+      <div class="section-label">Competitive Risk</div>
+      <p>Primary competitive threat. a16z resources + distribution create real market pressure. Speed to market is critical — they will close the depth gap over time.</p>
+    </div>
+  </div>
+  <div class="card-footer">Confidential — Internal Use Only &bull; Charterwell &bull; March 2026</div>
+</div>
+
+<!-- CARD 4: HYPERSCIENCE -->
+<div class="card">
+  <div class="card-header">
+    <span class="logo">CHARTERWELL</span>
+    <span class="label">Competitive Brief</span>
+  </div>
+  <div class="competitor-banner">
+    <span class="competitor-name">Hyperscience</span>
+    <span class="competitor-meta">Horizontal IDP &bull; $300M+ raised &bull; 99.5% extraction accuracy</span>
+  </div>
+  <div class="card-body">
+    <div class="section col-left">
+      <div class="section-label">Who They Are</div>
+      <p>Horizontal intelligent document processing (IDP) platform. Enterprise-grade extraction used across financial services, government, and insurance.</p>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">What They Do Well</div>
+      <ul>
+        <li>Proven accuracy — claims 99.5% extraction rate</li>
+        <li>Enterprise customers: AmEx, Schwab, SSA, VA</li>
+        <li>85% processing time reduction for a top-10 insurer</li>
+      </ul>
+    </div>
+
+    <div class="section full-width">
+      <div class="section-label">Where They Fall Short</div>
+      <ul>
+        <li>Horizontal platform — no insurance-specific intelligence built in</li>
+        <li>Doesn't understand coverage types, adjudication rules, or state compliance</li>
+        <li>Extraction tool, not a workspace — data out, not decisions made</li>
+        <li>Cannot determine coverage, route adjusters, or check 50-state compliance requirements</li>
+      </ul>
+    </div>
+
+    <div class="counter-position">
+      <div class="section-label">Our Counter-Position</div>
+      <p>"Hyperscience extracts data from documents. Charterwell understands what that data means for your claim."</p>
+    </div>
+
+    <div class="section col-left">
+      <div class="section-label">Proof Points</div>
+      <ul>
+        <li>IDP accuracy is table stakes — the value is the insurance intelligence layer on top</li>
+        <li>Generic IDP can't determine coverage, route adjusters, or check 50-state compliance</li>
+        <li>Extraction without domain understanding still requires manual review for every decision</li>
+      </ul>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">Trap Questions</div>
+      <ul>
+        <li>"Can Hyperscience determine whether a claim falls within policy coverage?"</li>
+        <li>"How does it handle state-specific compliance for PA vs. CA?"</li>
+        <li>"Does it route claims to the right adjuster based on document content?"</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-footer">Confidential — Internal Use Only &bull; Charterwell &bull; March 2026</div>
+</div>
+
+<!-- CARD 5: GUIDEWIRE / DUCK CREEK -->
+<div class="card">
+  <div class="card-header">
+    <span class="logo">CHARTERWELL</span>
+    <span class="label">Competitive Brief</span>
+  </div>
+  <div class="competitor-banner">
+    <span class="competitor-name">Guidewire / Duck Creek</span>
+    <span class="competitor-meta">Core P&amp;C Platforms &bull; GW: $1.2B rev, 19% ARR growth &bull; DC: Vista-owned</span>
+  </div>
+  <div class="card-body">
+    <div class="section col-left">
+      <div class="section-label">Who They Are</div>
+      <p>Legacy core P&amp;C platforms — systems of record for policy, billing, and claims administration. Guidewire is public ($1.2B rev); Duck Creek is Vista Equity-owned.</p>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">What They Do Well</div>
+      <ul>
+        <li>Massive installed base with deep carrier integration</li>
+        <li>Multi-year lock-in contracts — Liberty Mutual 10-year cloud deal</li>
+        <li>Adding AI capabilities to existing platform (bolted-on, but present)</li>
+      </ul>
+    </div>
+
+    <div class="section full-width">
+      <div class="section-label">Where They Fall Short</div>
+      <ul>
+        <li>Legacy architecture with AI bolted on — not AI-native</li>
+        <li>$5–50M+ implementations taking 12–24 months — slow and expensive</li>
+        <li>Manage claim records, not claim documents — data in fields, not intelligence from content</li>
+        <li>AI enhancements constrained by decades-old data models and workflows</li>
+      </ul>
+    </div>
+
+    <div class="counter-position">
+      <div class="section-label">Our Counter-Position</div>
+      <p>"Guidewire is your system of record. Charterwell is your system of intelligence. We don't replace your core — we make it smarter."</p>
+    </div>
+
+    <div class="section col-left">
+      <div class="section-label">Proof Points</div>
+      <ul>
+        <li>Guidewire implementation: $5–50M+, 12–24 months</li>
+        <li>Charterwell pilot: 60–90 days, measurable ROI</li>
+        <li>Sits alongside existing core — not a rip-and-replace</li>
+      </ul>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">Trap Questions</div>
+      <ul>
+        <li>"How long did your last Guidewire enhancement take?"</li>
+        <li>"Can Guidewire AI process a handwritten police report?"</li>
+        <li>"How many AI tools run alongside Guidewire today? How well do they integrate?"</li>
+      </ul>
+    </div>
+
+    <div class="partnership">
+      <div class="section-label">Partnership Angle</div>
+      <p>Guidewire integration is a Day 1 priority. Every Guidewire carrier is a Charterwell prospect. Position as complementary — the intelligence layer that makes their existing investment smarter.</p>
+    </div>
+  </div>
+  <div class="card-footer">Confidential — Internal Use Only &bull; Charterwell &bull; March 2026</div>
+</div>
+
+<!-- CARD 6: BUILD IN-HOUSE -->
+<div class="card">
+  <div class="card-header">
+    <span class="logo">CHARTERWELL</span>
+    <span class="label">Competitive Brief</span>
+  </div>
+  <div class="competitor-banner">
+    <span class="competitor-name">"We'll Build It In-House"</span>
+    <span class="competitor-meta">Internal Engineering / Innovation Team</span>
+  </div>
+  <div class="card-body">
+    <div class="section col-left">
+      <div class="section-label">Who They Are</div>
+      <p>The carrier's internal engineering or innovation team — ambitious, well-resourced, but facing a specialized problem they underestimate.</p>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">What They Do Well</div>
+      <ul>
+        <li>Full data control — no vendor dependency</li>
+        <li>Deep internal workflow knowledge and institutional context</li>
+        <li>Internal buy-in and executive sponsorship (initially)</li>
+      </ul>
+    </div>
+
+    <div class="section full-width">
+      <div class="section-label">Where They Fall Short</div>
+      <ul>
+        <li>88% of carriers want to build AI — only 7% have scaled it to production</li>
+        <li>Requires specialized document understanding across 50+ P&amp;C document types</li>
+        <li>50-state compliance is a moving target that demands continuous model updates</li>
+        <li>18–24 months to production with high failure rate — executive patience runs out</li>
+      </ul>
+    </div>
+
+    <div class="counter-position">
+      <div class="section-label">Our Counter-Position</div>
+      <p>"88% want to build. 7% succeed. The gap isn't ambition — it's the specialized AI expertise that insurance documents demand."</p>
+    </div>
+
+    <div class="section col-left">
+      <div class="section-label">Proof Points</div>
+      <ul>
+        <li>Internal AI build: 18–24 months to production, high failure rate</li>
+        <li>Charterwell pilot: 60–90 days with measurable ROI</li>
+        <li>Doc engine already understands 50+ P&amp;C document types on day one</li>
+      </ul>
+    </div>
+
+    <div class="section col-right">
+      <div class="section-label">Trap Questions</div>
+      <ul>
+        <li>"How many of your AI pilots have made it to production?"</li>
+        <li>"What's your timeline for all document types across all claim types?"</li>
+        <li>"Who on your team has built insurance-specific document intelligence before?"</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-footer">Confidential — Internal Use Only &bull; Charterwell &bull; March 2026</div>
+</div>
+
+</body>
+</html>

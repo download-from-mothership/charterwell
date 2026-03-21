@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .back-layer { fill: #FFFFFF; opacity: 0.3; }
+      .front-layer { fill: #FFFFFF; }
+      .doc-line { stroke: #1B2A4A; }
+    }
+  </style>
+  <!-- Back layer -->
+  <rect class="back-layer" x="14" y="14" width="36" height="44" rx="3" fill="#1B2A4A"/>
+  <!-- Front layer -->
+  <rect class="front-layer" x="8" y="6" width="36" height="44" rx="3" fill="#0D9488"/>
+  <!-- Document lines -->
+  <line class="doc-line" x1="16" y1="20" x2="36" y2="20" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+  <line class="doc-line" x1="16" y1="28" x2="36" y2="28" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+  <line class="doc-line" x1="16" y1="36" x2="28" y2="36" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
