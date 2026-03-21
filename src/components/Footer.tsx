@@ -18,8 +18,10 @@ export default function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-semibold text-navy-500">Product</h3>
             <ul className="space-y-2">
-              <li><Link href="/#product" className="text-sm text-muted hover:text-teal-500 transition-colors">How It Works</Link></li>
-              <li><Link href="/#features" className="text-sm text-muted hover:text-teal-500 transition-colors">Features</Link></li>
+              <li><Link href="/product" className="text-sm text-muted hover:text-teal-500 transition-colors">How It Works</Link></li>
+              <li><Link href="/solutions#claims-leaders" className="text-sm text-muted hover:text-teal-500 transition-colors">For Claims Leaders</Link></li>
+              <li><Link href="/solutions#technology-leaders" className="text-sm text-muted hover:text-teal-500 transition-colors">For CIOs</Link></li>
+              <li><Link href="/solutions#operations" className="text-sm text-muted hover:text-teal-500 transition-colors">For Operations</Link></li>
               <li><Link href="/contact" className="text-sm text-muted hover:text-teal-500 transition-colors">Request a Demo</Link></li>
             </ul>
           </div>
@@ -28,7 +30,8 @@ export default function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-semibold text-navy-500">Company</h3>
             <ul className="space-y-2">
-              <li><Link href="/#why" className="text-sm text-muted hover:text-teal-500 transition-colors">Why Charterwell</Link></li>
+              <li><Link href="/about" className="text-sm text-muted hover:text-teal-500 transition-colors">About</Link></li>
+              <li><Link href="/resources" className="text-sm text-muted hover:text-teal-500 transition-colors">Resources</Link></li>
               <li><Link href="/contact" className="text-sm text-muted hover:text-teal-500 transition-colors">Contact</Link></li>
             </ul>
           </div>
