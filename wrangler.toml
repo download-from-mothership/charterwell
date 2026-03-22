@@ -1,6 +1,6 @@
 # Cloudflare Pages — static export from Next.js (`output: "export"` → `out/`)
+# Do not set account_id here: Pages rejects it in wrangler.toml (pass via CI secrets / OAuth locally).
 # Dashboard: Workers & Pages → charterwell, or deploy with `npm run deploy:cf`
-account_id = "b1c66126754949edd56f2c61868fe36c"
 name = "charterwell"
 compatibility_date = "2025-03-21"
 pages_build_output_dir = "out"
