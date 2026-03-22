@@ -36,7 +36,7 @@ export const metadata: Metadata = {
       "The AI-native claims intelligence workspace. Every document understood. Every decision informed. Every claim connected.",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Charterwell — The AI Claims Intelligence Workspace",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Charterwell — The AI Claims Intelligence Workspace",
     description:
       "The AI-native claims intelligence workspace. Every document understood. Every decision informed.",
-    images: ["/og-image.svg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
