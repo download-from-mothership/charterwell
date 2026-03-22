@@ -202,15 +202,45 @@ function WhySection() {
 }
 
 function SocialProofSection() {
+  const benefits = [
+    "Early access to the Charterwell platform before general availability",
+    "Direct input into product roadmap and feature prioritization",
+    "Dedicated onboarding and integration engineering support",
+    "Preferred pricing locked in at design partner rates",
+  ];
+
   return (
-    <section className="border-t border-navy-100 bg-white px-6 py-16">
-      <div className="mx-auto max-w-4xl text-center">
-        <p className="text-sm font-semibold uppercase tracking-wider text-muted">
-          Trusted by forward-thinking P&C carriers
-        </p>
-        <p className="mt-4 text-sm text-muted">
-          Design partner program now open — join the carriers building the next generation of claims operations.
-        </p>
+    <section className="border-t border-navy-100 bg-white px-6 py-20 sm:py-24">
+      <div className="mx-auto max-w-4xl">
+        <div className="rounded-2xl border border-teal-200 bg-teal-50/50 p-8 sm:p-12">
+          <p className="text-sm font-semibold uppercase tracking-wider text-teal-600">
+            Now accepting design partners
+          </p>
+          <h2 className="mt-3 text-2xl font-bold text-navy-500 sm:text-3xl">
+            Shape the future of claims intelligence
+          </h2>
+          <p className="mt-4 max-w-2xl text-muted">
+            We&apos;re working with a select group of P&amp;C carriers to build the
+            claims workspace the industry needs. Design partners get early access,
+            direct product influence, and measurable ROI within 90 days.
+          </p>
+          <ul className="mt-6 space-y-3">
+            {benefits.map((benefit) => (
+              <li key={benefit} className="flex items-start gap-3 text-sm text-navy-400">
+                <svg className="mt-0.5 h-5 w-5 shrink-0 text-teal-500" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                {benefit}
+              </li>
+            ))}
+          </ul>
+          <Link
+            href="/contact"
+            className="mt-8 inline-block rounded-lg bg-teal-500 px-8 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-600"
+          >
+            Apply for the Design Partner Program
+          </Link>
+        </div>
       </div>
     </section>
   );
