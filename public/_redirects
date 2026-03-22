@@ -1,0 +1,2 @@
+/blog /resources 301
+/blog/* /resources 301
