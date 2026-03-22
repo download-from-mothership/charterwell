@@ -253,7 +253,7 @@ function CTASection() {
         <h2 className="text-3xl font-bold text-white sm:text-4xl">
           See Charterwell in your workflow
         </h2>
-        <p className="mt-4 text-lg text-navy-200">
+        <p className="mt-4 text-lg text-navy-100">
           60–90 day pilot. One claim type. One geography. Measurable ROI before enterprise commitment.
         </p>
         <Link

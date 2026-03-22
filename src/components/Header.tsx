@@ -43,7 +43,7 @@ export default function Header() {
         {/* Mobile menu button */}
         <button
           type="button"
-          className="md:hidden rounded-lg p-2 text-navy-500 hover:bg-navy-50"
+          className="md:hidden rounded-lg p-2.5 text-navy-500 hover:bg-navy-50"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-expanded={menuOpen}
           aria-label="Toggle navigation menu"

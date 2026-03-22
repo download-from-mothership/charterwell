@@ -140,7 +140,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full rounded-lg bg-teal-500 px-8 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-teal-600 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-lg bg-teal-500 px-8 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-teal-600 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "submitting" ? "Sending..." : "Schedule a Conversation"}
       </button>
