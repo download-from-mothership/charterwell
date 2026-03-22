@@ -1,10 +1,12 @@
-# Deploy static export (`out/`) via Direct Upload. Configure either **Secrets** or **Variables**
-# (Settings → Secrets and variables → Actions). Prefer **Secrets** for CLOUDFLARE_API_TOKEN.
-#   CLOUDFLARE_API_TOKEN — Custom token with Account → Cloudflare Pages → Edit
+# Deploy static export (`out/`) via Direct Upload.
+#
+# Credentials: GitHub → Settings → Environments → [name] → Environment secrets (or variables).
+# Job uses `environment.name` below — default **production**. To use another name, add a
+# **repository** variable `CLOUDFLARE_ENVIRONMENT` with that environment’s exact name.
+#   CLOUDFLARE_API_TOKEN — Cloudflare token, Account → Cloudflare Pages → Edit
 #   CLOUDFLARE_ACCOUNT_ID — Cloudflare account ID
 #
-# If you use org-level variables, ensure this repo is allowed to access them.
-# Environment-scoped secrets need `environment:` on the job.
+# Repository- or org-level Secrets/Variables still work if you omit `environment` later.
 #
 # Cloudflare’s “Connect to Git” in the dashboard is optional; this workflow is your Git-based CI.
 name: Deploy Cloudflare Pages
@@ -25,6 +27,8 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ vars.CLOUDFLARE_ENVIRONMENT || 'production' }}
     permissions:
       contents: read
     steps:
@@ -46,11 +50,11 @@ jobs:
           CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           if [ -z "$CF_TOKEN" ]; then
-            echo "::error::CLOUDFLARE_API_TOKEN is empty. Add a Repository or Organization **Secret** or **Variable** with that exact name (not CF_TOKEN). Prefer Secret. Token needs Account → Cloudflare Pages → Edit."
+            echo "::error::CLOUDFLARE_API_TOKEN is empty. Add it to the GitHub **Environment** used by this job (default: production), or to repo/org secrets. Name must be exactly CLOUDFLARE_API_TOKEN. Token needs Account → Cloudflare Pages → Edit."
             exit 1
           fi
           if [ -z "$CF_ACCOUNT" ]; then
-            echo "::error::CLOUDFLARE_ACCOUNT_ID is empty. Add a Repository or Organization Secret or Variable with that exact name."
+            echo "::error::CLOUDFLARE_ACCOUNT_ID is empty. Add it to the same GitHub **Environment** (or repo/org secrets). Name must be exactly CLOUDFLARE_ACCOUNT_ID."
             exit 1
           fi
           echo "Cloudflare credentials are configured."
