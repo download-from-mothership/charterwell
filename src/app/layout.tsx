@@ -116,6 +116,11 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <head>
         <JsonLd />
+        <script
+          defer
+          data-domain="charterwell.io"
+          src="https://plausible.io/js/script.js"
+        />
       </head>
       <body className="flex min-h-screen flex-col">
         <a
