@@ -1,11 +1,16 @@
 # Cloudflare Pages — static export from Next.js (`output: "export"` → `out/`)
 # Do not set account_id here: Pages rejects it in wrangler.toml (pass via CI secrets / OAuth locally).
 #
-# Native Git builds (dashboard): Build command = npm run build, Build output directory = out
-# Deploy command: npm run cf:pages:deploy (or leave empty so Pages uploads `out`).
-# Non-production branch deploy command: use the same npm run cf:pages:deploy — NOT
-# `wrangler versions upload` (Workers-only; breaks preview builds).
-# Do not use `wrangler deploy` for production or previews (that targets Workers).
+# Native Git builds (dashboard):
+#   Build command: npm run build
+#   Build output directory: out
+#   Deploy command: **leave empty** (recommended). Cloudflare then uploads `out` with its own
+#   auth — no CLOUDFLARE_API_TOKEN needed and no account/token mismatch.
+# If you set Deploy command to `npm run cf:pages:deploy`, the token MUST be for the **same**
+# Cloudflare account where this Pages project lives, with Account → Cloudflare Pages → Edit.
+# Auth error 10000 usually means wrong account, wrong token scopes, or project in another account.
+# Non-production: same as production, or empty — NOT `wrangler versions upload`.
+# Never use `wrangler deploy` for this site (Workers only).
 # Local full build+upload: npm run deploy:cf
 name = "charterwell"
 compatibility_date = "2025-03-21"
