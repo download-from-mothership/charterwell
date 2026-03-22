@@ -1,0 +1,5 @@
+# Cloudflare Pages — static export from Next.js (`output: "export"` → `out/`)
+# Dashboard: Workers & Pages → Create → Connect to Git, or deploy with `npm run deploy:cf`
+name = "charterwell"
+compatibility_date = "2025-03-21"
+pages_build_output_dir = "out"
