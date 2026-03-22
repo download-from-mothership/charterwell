@@ -2,9 +2,10 @@
 # Do not set account_id here: Pages rejects it in wrangler.toml (pass via CI secrets / OAuth locally).
 #
 # Native Git builds (dashboard): Build command = npm run build, Build output directory = out
-# If you set a custom "Deploy command", it must NOT be `wrangler deploy` (that targets Workers).
-# Either leave Deploy command empty (Pages uploads `out` after build), or use:
-#   npm run cf:pages:deploy
+# Deploy command: npm run cf:pages:deploy (or leave empty so Pages uploads `out`).
+# Non-production branch deploy command: use the same npm run cf:pages:deploy — NOT
+# `wrangler versions upload` (Workers-only; breaks preview builds).
+# Do not use `wrangler deploy` for production or previews (that targets Workers).
 # Local full build+upload: npm run deploy:cf
 name = "charterwell"
 compatibility_date = "2025-03-21"
