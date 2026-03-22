@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const BASE_URL = "https://charterwell.ai";
+const BASE_URL = process.env.SITE_URL || "https://charterwell.io";
 const BLOG_DIR = path.join(process.cwd(), "content/blog");
 
 const staticPages = [

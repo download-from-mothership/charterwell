@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   description:
     "The AI-native claims intelligence workspace. Every document understood. Every decision informed. Every claim connected.",
-  metadataBase: new URL("https://charterwell.ai"),
+  metadataBase: new URL("https://charterwell.io"),
   keywords: [
     "Charterwell",
     "AI claims processing",
@@ -70,8 +70,8 @@ function JsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Charterwell",
-    url: "https://charterwell.ai",
-    logo: "https://charterwell.ai/logo-horizontal.svg",
+    url: "https://charterwell.io",
+    logo: "https://charterwell.io/logo-horizontal.svg",
     description:
       "The AI-native claims intelligence workspace for P&C insurance carriers.",
     foundingDate: "2026",
@@ -89,7 +89,7 @@ function JsonLd() {
     offers: {
       "@type": "Offer",
       description: "Contact for pricing",
-      url: "https://charterwell.ai/contact",
+      url: "https://charterwell.io/contact",
     },
   };
 
